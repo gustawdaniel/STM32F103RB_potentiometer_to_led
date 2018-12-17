@@ -106,29 +106,12 @@ int main(void)
   {
     int value = HAL_ADC_GetValue(&hadc1);
 
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, value < 512 * 1 ? GPIO_PIN_RESET : GPIO_PIN_SET );
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, value < 512 * 2 ? GPIO_PIN_RESET : GPIO_PIN_SET );
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, value < 512 * 3 ? GPIO_PIN_RESET : GPIO_PIN_SET );
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, value < 512 * 4 ? GPIO_PIN_RESET : GPIO_PIN_SET );
+
   /* USER CODE END WHILE */
-
-
-    if(value < 512 ) {
-      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
-      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_RESET);
-      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
-      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_RESET);
-    } else if(value < 512 * 2) {
-      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
-      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_RESET);
-      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
-      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_RESET);
-    } else if(value < 512 * 3) {
-      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET);
-      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
-      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_RESET);
-    } else if(value < 512 * 4) {
-      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
-      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_RESET);
-    } else  {
-      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, GPIO_PIN_SET);
-    }
 
   /* USER CODE BEGIN 3 */
     HAL_Delay(10);
